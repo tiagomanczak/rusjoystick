@@ -1,0 +1,28 @@
+[package]
+name = "atari-cx30"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+description = "Atari CX30 joystick implementation using RP2040"
+license.workspace = true
+
+[features]
+default = []
+
+[dependencies]
+usbd-human-interface-device.workspace = true
+usb-device.workspace = true
+packed_struct.workspace = true
+frunk.workspace = true
+fugit.workspace = true
+cortex-m.workspace = true
+cortex-m-rt.workspace = true
+embedded-hal.workspace = true
+embedded-hal-02.workspace = true
+defmt.workspace = true
+defmt-rtt.workspace = true
+panic-probe.workspace = true
+rp-pico.workspace = true
+
+[build-dependencies]
+usbd-human-interface-device = { version = "0.6.0", default-features = false }

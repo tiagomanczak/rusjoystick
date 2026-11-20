@@ -1,7 +1,7 @@
 #![no_std]
 #![no_main]
 
-//! Joystick example for RP2040/Pico
+//! Atari CX40 joystick implementation for RP2040/Pico
 //!
 //! This example demonstrates a USB HID joystick implementation with digital button inputs
 //! and optional analog stick support via ADC.
@@ -93,8 +93,8 @@ fn main() -> ! {
     //https://pid.codes
     let mut usb_dev = UsbDeviceBuilder::new(&usb_bus, UsbVidPid(0x1209, 0x0001))
         .strings(&[StringDescriptors::default()
-            .manufacturer("usbd-human-interface-device")
-            .product("Rusty joystick")
+            .manufacturer("Rusjoystick")
+            .product("Atari CX40")
             .serial_number("TEST")])
         .unwrap()
         .build();

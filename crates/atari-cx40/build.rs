@@ -20,7 +20,7 @@ fn main() {
     let out = &PathBuf::from(env::var_os("OUT_DIR").unwrap());
     File::create(out.join("memory.x"))
         .unwrap()
-        .write_all(include_bytes!("memory.x"))
+        .write_all(include_bytes!("../../memory.x"))
         .unwrap();
     println!("cargo:rustc-link-search={}", out.display());
 
@@ -29,9 +29,13 @@ fn main() {
     // executable location.
     let target_dir = env::var("CARGO_TARGET_DIR")
         .map(PathBuf::from)
-        .unwrap_or_else(|_| PathBuf::from(env::var("CARGO_MANIFEST_DIR").unwrap()).join("target"));
+        .unwrap_or_else(|_| PathBuf::from(env::var("CARGO_MANIFEST_DIR").unwrap()).parent().unwrap().parent().unwrap().join("target"));
+    let target_triple = env::var("TARGET").unwrap();
     let profile = env::var("PROFILE").unwrap();
-    let mapping_path = target_dir.join(profile).join("generated_sdl_mapping.txt");
+    let mapping_path = target_dir
+        .join(target_triple)
+        .join(profile)
+        .join("generated_sdl_mapping.txt");
     std::fs::create_dir_all(mapping_path.parent().unwrap()).unwrap();
     std::fs::write(mapping_path, generate_sdl_mapping()).unwrap();
 
@@ -49,5 +53,5 @@ fn generate_sdl_mapping() -> &'static str {
     debug_assert_eq!(JOYSTICK_DESCRIPTOR[1], 0x01);
     debug_assert!(JOYSTICK_DESCRIPTOR.len() >= 34);
 
-    "03000000091200000100000011010000,Rusty Joystick,a:b0,b:b1,x:b2,y:b3,leftshoulder:b4,rightshoulder:b5,back:b6,start:b7,leftx:a0,lefty:a1"
+    "03000000091200000100000011010000,Atari CX40,a:b0,b:b1,x:b2,y:b3,leftshoulder:b4,rightshoulder:b5,back:b6,start:b7,leftx:a0,lefty:a1"
 }
