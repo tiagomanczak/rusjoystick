@@ -1,0 +1,24 @@
+[package]
+name = "atari-cx40-embassy"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+description = "Atari CX40 joystick implementation using Embassy on RP2040"
+license.workspace = true
+
+[features]
+default = []
+analog = []
+
+[dependencies]
+embassy-executor = { version = "0.10.0", features = ["executor-thread", "platform-cortex-m"] }
+embassy-futures = "0.1.2"
+embassy-rp = { version = "0.10.0", features = ["boot2-w25q080", "critical-section-impl", "defmt", "rp2040", "time-driver"] }
+embassy-time = { version = "0.5.1", features = ["defmt"] }
+embassy-usb = { version = "0.6.0", features = ["defmt"] }
+static_cell = "2.1.1"
+portable-atomic = { version = "1.15", features = ["critical-section"] }
+cortex-m-rt.workspace = true
+defmt.workspace = true
+defmt-rtt.workspace = true
+panic-probe.workspace = true
