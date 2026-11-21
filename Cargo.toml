@@ -1,7 +1,10 @@
 [workspace]
 members = [
     "crates/atari-cx40",
+    "crates/atari-cx40-embassy",
+    "crates/atari-cx40-ble",
     "crates/atari-cx30",
+    "crates/atari-cx70",
 ]
 resolver = "2"
 
@@ -25,6 +28,7 @@ defmt = "1.0"
 defmt-rtt = "1.0"
 panic-probe = { version = "1.0", features = ["print-defmt"] }
 rp-pico = "0.9"
+
 [profile.dev]
 codegen-units = 1
 debug = 2

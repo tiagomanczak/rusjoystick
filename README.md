@@ -9,7 +9,10 @@ Originally based on examples from `usbd-human-interface-device`, the repository 
 | Variant | Controller | Implementation status | Documentation |
 | --- | --- | --- | --- |
 | `atari-cx40` | Atari CX40 joystick | USB implementation available | [CX40 README](crates/atari-cx40/README.md) |
-| `atari-cx30` | Atari CX30 paddle pair | Hardware support planned; USB implementation not added yet | [CX30 README](crates/atari-cx30/README.md) |
+| `atari-cx40-embassy` | Atari CX40 joystick | Independent Embassy USB implementation | [CX40 Embassy README](crates/atari-cx40-embassy/README.md) |
+| `atari-cx40-ble` | Atari CX40 joystick | Embassy Trouble BLE HID implementation for Pico W | [CX40 BLE README](crates/atari-cx40-ble/README.md) |
+| `atari-cx30` | Atari CX30 paddle pair | USB implementation available | [CX30 README](crates/atari-cx30/README.md) |
+| `atari-cx70` | Atari CX30 paddle pair or CX40 joystick | Embassy USB HID implementation with startup ADC detection | [CX70 README](crates/atari-cx70/README.md) |
 
 Additional retro controllers will be added as separate workspace members. Keep controller-specific wiring and protocol code inside each member rather than adding all variants to a shared firmware binary.
 
@@ -39,7 +42,9 @@ Build one controller variant:
 
 ```shell
 cargo build -p atari-cx40
+cargo build -p atari-cx40-embassy
 cargo build -p atari-cx30
+cargo build -p atari-cx70
 ```
 
 Check every workspace member:
@@ -52,9 +57,11 @@ Run or flash the CX40 implementation:
 
 ```shell
 cargo run --release -p atari-cx40
+cargo run --release -p atari-cx40-embassy
+cargo run --release -p atari-cx70
 ```
 
-CX30 is documented for hardware preparation but does not yet have a firmware implementation to run.
+The CX30 and CX70 firmware packages are available for their respective paddle and shared-controller hardware.
 
 ## Workspace layout
 
@@ -62,7 +69,9 @@ CX30 is documented for hardware preparation but does not yet have a firmware imp
 rusjoystick/
 ├── crates/
 │   ├── atari-cx40/  # USB joystick implementation
-│   └── atari-cx30/  # Paddle implementation planned
+│   ├── atari-cx40-embassy/  # Independent Embassy USB joystick implementation
+│   ├── atari-cx30/  # Paddle implementation
+│   └── atari-cx70/  # CX30/CX40 shared-hardware USB implementation
 ├── memory.x         # RP2040 linker memory layout
 └── Cargo.toml       # Workspace configuration
 ```
