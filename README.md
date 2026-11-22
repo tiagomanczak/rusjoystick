@@ -21,7 +21,7 @@ Additional retro controllers will be added as separate workspace members. Keep c
 The workspace is intended to support two transport paths:
 
 - **USB HID:** direct connection to Windows, Linux, macOS, SDL, Bevy, emulators, and other HID-aware hosts.
-- **Bluetooth HID:** planned support for RP2040-compatible Bluetooth modules or a future supported Bluetooth controller stack.
+- **Bluetooth HID:** BLE HID over GATT is implemented for the CX40 on the Pico W; see the [BLE host notes](docs/ble-host.md) and [report format](docs/hid-report.md).
 
 USB and Bluetooth support should remain separate from controller decoding. A CX40 or CX30 implementation should convert physical inputs into a common or controller-specific HID report, while transport crates decide whether that report is sent over USB or Bluetooth.
 
@@ -69,9 +69,11 @@ The CX30 and CX70 firmware packages are available for their respective paddle an
 rusjoystick/
 ├── crates/
 │   ├── atari-cx40/  # USB joystick implementation
+│   ├── atari-cx40-ble/  # Pico W BLE HID joystick implementation
 │   ├── atari-cx40-embassy/  # Independent Embassy USB joystick implementation
 │   ├── atari-cx30/  # Paddle implementation
 │   └── atari-cx70/  # CX30/CX40 shared-hardware USB implementation
+├── docs/             # BLE host and HID report documentation
 ├── memory.x         # RP2040 linker memory layout
 └── Cargo.toml       # Workspace configuration
 ```

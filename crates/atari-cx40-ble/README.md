@@ -13,7 +13,6 @@ The wiring matches the other CX40 implementations:
 - GPIO9: right
 - GPIO10: up
 - GPIO11: down
-- GPIO26: optional analog X-axis with the `analog` feature
 - Ground: controller ground
 
 ## Build
@@ -22,7 +21,6 @@ The CYW43 firmware is downloaded automatically by `build.rs`:
 
 ```shell
 cargo build --release -p atari-cx40-ble
-cargo build --release -p atari-cx40-ble --features analog
 ```
 
 The device advertises as `Rusjoystick CX40 BLE` with the standard HID service and a three-byte report:
@@ -30,3 +28,8 @@ The device advertises as `Rusjoystick CX40 BLE` with the standard HID service an
 - Byte 0: X axis
 - Byte 1: Y axis
 - Byte 2: eight button bits
+
+## BLE details
+
+- [BLE host configuration and GATT characteristics](../../docs/ble-host.md)
+- [HID report layout and descriptor](../../docs/hid-report.md)

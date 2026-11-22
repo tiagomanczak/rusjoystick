@@ -26,8 +26,10 @@ const JOYSTICK_REPORT_DESCRIPTOR: &[u8] = &[
     0x00, 0x25, 0x01, 0x75, 0x01, 0x95, 0x08, 0x81, 0x02, 0xc0,
 ];
 
+// empiric measured values range from 160 to 4095 with the analog cx30
+// with the cx40 the pin is open and it is around 60
 const DETECTION_SAMPLES: usize = 8;
-const CX30_DETECT_THRESHOLD: u16 = 32;
+const CX30_DETECT_THRESHOLD: u16 = 100;
 
 static CONFIG_DESCRIPTOR: StaticCell<[u8; 256]> = StaticCell::new();
 static BOS_DESCRIPTOR: StaticCell<[u8; 256]> = StaticCell::new();
